@@ -13,9 +13,9 @@ export const portfolioData = {
       linkedin: "Linkedin"
     },
     navigation: {
-      skills: "Skills",
-      projects: "Projects",
-      hireMe: "Hire me"
+      skills: "Yetenekler",
+      projects: "Projeler",
+      hireMe: "Bana Ulaş"
     },
     skills: [
       {
@@ -32,10 +32,10 @@ export const portfolioData = {
       }
     ],
     profile: {
-      title: "Profile",
+      title: "Profil",
       sections: {
-        profile: "Profile",
-        aboutMe: "About Me"
+        profile: "Profil",
+        aboutMe: "Hakkımda"
       },
       labels: {
         dateOfBirth: "Doğum Tarihi",
@@ -78,10 +78,10 @@ export const portfolioData = {
       }
     ],
     footer: {
-      title: "Let's work together on your next product.",
+      title: "Bir sonraki ürününüzün kaliteli ellerden çıkması için.",
       email: "ahmetkaanslan@outlook.com",
       links: {
-        personalBlog: "Personal Blog",
+        personalBlog: "Kişisel Blog",
         github: "Github",
         linkedin: "Linkedin"
       }
