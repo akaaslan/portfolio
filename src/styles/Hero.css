@@ -1,0 +1,170 @@
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* Vertical Navigation - Left Side */
+.vertical-nav-left {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  z-index: 10;
+}
+
+/* Vertical Navigation - Right Side */
+.vertical-nav-right {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* Vertical Text Style */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.vertical-text:hover {
+  color: var(--accent-color, #8b5cf6);
+}
+
+/* Active Section Highlight */
+.vertical-text.active {
+  color: var(--accent-color);
+  transform: translateX(-5px);
+  font-weight: 600;
+}
+
+.download-cv {
+  font-weight: 500;
+}
+
+/* Hero Content */
+.hero-content {
+  max-width: 90%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.hero-title {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-color);
+  word-wrap: break-word;
+  max-width: 100%;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.7),
+               0 0 20px rgba(59, 130, 246, 0.5),
+               0 0 30px rgba(59, 130, 246, 0.3);
+  animation: glow 0s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.3),
+                 0 0 10px rgba(59, 130, 246, 0.2);
+  }
+  to {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.6),
+                 0 0 20px rgba(59, 130, 246, 0.4),
+                 0 0 30px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* Typewriter Effect */
+.role-text {
+  display: inline-block;
+  min-width: 0.5ch;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.05em;
+  color: var(--accent-color); /* Blue */
+}
+
+.role-dot,
+.role-web,
+.role-paren,
+.role-dev {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.05em;
+  color: var(--accent-color); /* Blue */
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  font-family: 'Press Start 2P', cursive;
+  color: var(--accent-color); /* Blue */
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vertical-nav-left,
+  .vertical-nav-right {
+    display: none;
+  }
+
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+
+  .hero-content {
+    max-width: 95%;
+    padding: 0 0.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(0.7rem, 3vw, 1rem);
+    line-height: 1.8;
+  }
+
+  .hero-content {
+    padding: 0 0.25rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}

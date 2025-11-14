@@ -69,11 +69,11 @@ export const portfolioData = {
         viewSiteLink: "https://ecommerce.vercel.app/"
       },
       {
-        title: "Bir şeyler daha var güncelleriz burayı.",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non lorem mattis, molestie urna sit amet, faucibus metus quis libero magna.",
+        title: "Portfolio Website",
+        description: "Kişisel portfolio websitem. Modern tasarım ve animasyonlar içeriyor.",
         image: "/api/placeholder/400/300",
-        techStack: ["bekleyin", "azıcık"],
-        githubLink: "#",
+        techStack: ["React", "TypeScript", "Vite"],
+        githubLink: "https://github.com/akaaslan/portfolio2",
         viewSiteLink: "#"
       }
     ],
@@ -153,11 +153,11 @@ export const portfolioData = {
         viewSiteLink: "https://adrianred.vercel.app/"
       },
       {
-        title: "gonna update soon.",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non lorem mattis, molestie urna sit amet, faucibus metus quis libero magna.",
+        title: "Portfolio Website",
+        description: "My personal portfolio website featuring modern design and smooth animations.",
         image: "/api/placeholder/400/300",
-        techStack: ["none"],
-        githubLink: "https://github.com/akaaslan/guideapp3",
+        techStack: ["React", "TypeScript", "Vite"],
+        githubLink: "https://github.com/akaaslan/portfolio2",
         viewSiteLink: "#"
       }
     ],

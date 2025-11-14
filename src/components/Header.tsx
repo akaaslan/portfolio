@@ -1,205 +1,149 @@
-import { useTheme } from '../hooks/useTheme';
+import { useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import { useState, useEffect } from 'react';
+import { useTheme } from '../hooks/useTheme';
+import '../styles/HeaderMinimal.css';
 import '../styles/Header.css';
 
-// Profile images
-import engProfileImage from '../assets/engppplaceholder.png';
-import trProfileImage from '../assets/trppplaceholder.png';
+interface HeaderProps {
+  activeSection: string;
+}
 
-const Header = () => {
+const Header = ({ activeSection }: HeaderProps) => {
+  const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
-  const { language, setLanguage, data } = useLanguage();
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleLanguageChange = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setLanguage(language === 'tr' ? 'en' : 'tr');
+      setTimeout(() => setIsAnimating(false), 300);
+    }, 300);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <>
-      <header className={`header ${isLoaded ? 'loaded' : ''}`} role="banner">
-        <div className="header-container">
-        <div className="header-controls">
-          {/* BB-8 Dark Mode Toggle */}
-          <label className="bb8-toggle">
-            <input 
-              className="bb8-toggle__checkbox" 
-              type="checkbox"
-              checked={theme === 'dark'}
-              onChange={toggleTheme}
-              aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-            />
-            <div className="bb8-toggle__container">
-              <div className="bb8-toggle__scenery">
-                <div className="bb8-toggle__star"></div>
-                <div className="bb8-toggle__star"></div>
-                <div className="bb8-toggle__star"></div>
-                <div className="bb8-toggle__star"></div>
-                <div className="bb8-toggle__star"></div>
-                <div className="bb8-toggle__star"></div>
-                <div className="bb8-toggle__star"></div>
-                <div className="tatto-1"></div>
-                <div className="tatto-2"></div>
-                <div className="gomrassen"></div>
-                <div className="hermes"></div>
-                <div className="chenini"></div>
-                <div className="bb8-toggle__cloud"></div>
-                <div className="bb8-toggle__cloud"></div>
-                <div className="bb8-toggle__cloud"></div>
-              </div>
-              <div className="bb8">
-                <div className="bb8__head-container">
-                  <div className="bb8__antenna"></div>
-                  <div className="bb8__antenna"></div>
-                  <div className="bb8__head"></div>
-                </div>
-                <div className="bb8__body"></div>
-              </div>
-              <div className="artificial__hidden">
-                <div className="bb8__shadow"></div>
-              </div>
-            </div>
-          </label>
+    <header className="header minimal" role="banner">
+      <div className="header-container">
+        {/* Logo */}
+        <div className="header-logo">
+          <h1>kaan</h1>
+        </div>
 
-          {/* Language Switch */}
-          <div className="language-switch">
+        {/* BB-8 Toggle & Language Switch */}
+        <div className="header-right">
+          {/* Hamburger Menu - Mobile Only */}
+          <button 
+            className="hamburger-btn"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
+            <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
+            <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
+          </button>
+
+          {/* Desktop Navigation */}
+          <div className="desktop-nav">
+            {/* BB-8 Dark Mode Toggle */}
+            <label className="bb8-toggle">
+              <input 
+                className="bb8-toggle__checkbox" 
+                type="checkbox"
+                checked={theme === 'dark'}
+                onChange={toggleTheme}
+                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              />
+              <div className="bb8-toggle__container">
+                <div className="bb8-toggle__scenery">
+                  <div className="bb8-toggle__star"></div>
+                  <div className="bb8-toggle__star"></div>
+                  <div className="bb8-toggle__star"></div>
+                  <div className="bb8-toggle__star"></div>
+                  <div className="bb8-toggle__star"></div>
+                  <div className="bb8-toggle__star"></div>
+                  <div className="bb8-toggle__star"></div>
+                  <div className="tatto-1"></div>
+                  <div className="tatto-2"></div>
+                  <div className="gomrassen"></div>
+                  <div className="hermes"></div>
+                  <div className="chenini"></div>
+                  <div className="bb8-toggle__cloud"></div>
+                  <div className="bb8-toggle__cloud"></div>
+                  <div className="bb8-toggle__cloud"></div>
+                </div>
+                <div className="bb8">
+                  <div className="bb8__head-container">
+                    <div className="bb8__antenna"></div>
+                    <div className="bb8__antenna"></div>
+                    <div className="bb8__head"></div>
+                  </div>
+                  <div className="bb8__body"></div>
+                </div>
+                <div className="artificial__hidden">
+                  <div className="bb8__shadow"></div>
+                </div>
+              </div>
+            </label>
+
             <button
-              className="lang-btn"
-              onClick={() => setLanguage(language === 'tr' ? 'en' : 'tr')}
+              className="self-service-btn"
+              onClick={handleLanguageChange}
               aria-label={language === 'tr' ? 'Switch to English' : 'Switch to Turkish'}
             >
-              {language === 'tr' ? (
-                <>SWITCH TO <span className="lang-highlight">ENGLISH</span></>
-              ) : (
-                <><span className="lang-highlight">TÜRKÇE'YE</span> GEÇ</>
-              )}
+              <span className={`service-lang ${isAnimating ? 'lang-exit' : 'lang-enter'}`}>
+                {language === 'tr' ? 'TÜRKÇE' : 'ENG'}
+              </span>
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Navigation */}
-        <nav className="navigation" role="navigation" aria-label="Main navigation">
-          <ul className="nav-list">
-            <li>
-              <button
-                className="nav-link"
-                onClick={() => scrollToSection('skills')}
-              >
-                {data.navigation.skills}
-              </button>
-            </li>
-            <li>
-              <button
-                className="nav-link"
-                onClick={() => scrollToSection('projects')}
-              >
-                {data.navigation.projects}
-              </button>
-            </li>
-            <li>
-              <button
-                className="nav-link hire-me-btn"
-                onClick={() => scrollToSection('contact')}
-              >
-                {data.navigation.hireMe}
-              </button>
-            </li>
-          </ul>
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+        <nav className="mobile-nav">
+          <a 
+            href="#hero" 
+            className={`mobile-nav-link ${activeSection === 'hero' ? 'active' : ''}`}
+            onClick={toggleMenu}
+          >
+            hero
+          </a>
+          <a 
+            href="#about" 
+            className={`mobile-nav-link ${activeSection === 'about' ? 'active' : ''}`}
+            onClick={toggleMenu}
+          >
+            about me
+          </a>
+          <a 
+            href="#skills" 
+            className={`mobile-nav-link ${activeSection === 'skills' ? 'active' : ''}`}
+            onClick={toggleMenu}
+          >
+            skills
+          </a>
+          <a 
+            href="#projects" 
+            className={`mobile-nav-link ${activeSection === 'projects' ? 'active' : ''}`}
+            onClick={toggleMenu}
+          >
+            projects
+          </a>
+          <a 
+            href="#contact" 
+            className={`mobile-nav-link ${activeSection === 'contact' ? 'active' : ''}`}
+            onClick={toggleMenu}
+          >
+            contact
+          </a>
         </nav>
-
-        {/* Hero Section */}
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-content">
-            <div className="hero-text">
-              <h1 id="hero-title" className="hero-name">
-                {data.name}
-              </h1>
-              <h2 className="hero-title">
-                {data.title}
-              </h2>
-              <p className="hero-description">
-                {data.description}
-              </p>
-              <div className="hero-buttons">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => scrollToSection('contact')}
-                >
-                  {data.buttons.hireMe}
-                </button>
-                <a
-                  href="#"
-                  className="btn btn-secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit GitHub profile"
-                >
-                  <svg className="btn-icon" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                  {data.buttons.github}
-                </a>
-                <a
-                  href="#"
-                  className="btn btn-secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit LinkedIn profile"
-                >
-                  <svg className="btn-icon" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                  {data.buttons.linkedin}
-                </a>
-              </div>
-            </div>
-            <div className="hero-image">
-              <img
-                src={language === 'en' ? engProfileImage : trProfileImage}
-                alt={`${data.name} profile`}
-                className="profile-image"
-              />
-            </div>
-          </div>
-        </section>
       </div>
     </header>
-
-    {/* Scroll to Top Button */}
-    {showScrollTop && (
-      <button
-        className="scroll-to-top"
-        onClick={scrollToTop}
-        aria-label="Scroll to top"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 4L4 12h6v8h4v-8h6l-8-8z" fill="currentColor"/>
-        </svg>
-      </button>
-    )}
-  </>
   );
 };
 

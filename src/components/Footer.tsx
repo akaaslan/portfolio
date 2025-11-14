@@ -23,15 +23,6 @@ const Footer = () => {
                 className="social-link"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Visit personal blog"
-              >
-                {data.footer.links.personalBlog}
-              </a>
-              <a
-                href="#"
-                className="social-link"
-                target="_blank"
-                rel="noopener noreferrer"
                 aria-label="Visit GitHub profile"
               >
                 {data.footer.links.github}
