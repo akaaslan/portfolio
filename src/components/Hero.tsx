@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import '../styles/Hero.css';
 
 const roles = [
-  'front-end',
-  'back-end',
-  'react native',
+  'frontend',
+  'backend',
+  'react-native',
   'full-stack'
 ];
 

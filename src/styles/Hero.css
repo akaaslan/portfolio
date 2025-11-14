@@ -78,20 +78,90 @@
   color: var(--text-color);
   word-wrap: break-word;
   max-width: 100%;
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.7),
-               0 0 20px rgba(59, 130, 246, 0.5),
-               0 0 30px rgba(59, 130, 246, 0.3);
-  animation: glow 0s ease-in-out infinite alternate;
+  position: relative;
+  
+  /* CRT Glow Effect */
+  text-shadow: 0 0 5px rgba(59, 130, 246, 0.8),
+               0 0 10px rgba(59, 130, 246, 0.6),
+               0 0 20px rgba(59, 130, 246, 0.4),
+               0 0 30px rgba(59, 130, 246, 0.3),
+               2px 2px 3px rgba(59, 130, 246, 0.3);
+  
+  /* CRT Animations */
+  animation: crt-glow 2s ease-in-out infinite alternate,
+             crt-flicker 0.15s infinite;
 }
-@keyframes glow {
-  from {
-    text-shadow: 0 0 5px rgba(59, 130, 246, 0.3),
-                 0 0 10px rgba(59, 130, 246, 0.2);
+
+/* CRT Monitor Effects */
+.hero-title::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(59, 130, 246, 0.05) 2%,
+    transparent 4%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  animation: crt-scanline 8s linear infinite;
+  z-index: 1;
+}
+
+.hero-title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(59, 130, 246, 0.02);
+  pointer-events: none;
+  animation: crt-flicker 0.15s infinite;
+  z-index: 1;
+}
+
+/* CRT Glow Animation */
+@keyframes crt-glow {
+  0% {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.7),
+                 0 0 10px rgba(59, 130, 246, 0.5),
+                 0 0 20px rgba(59, 130, 246, 0.3),
+                 0 0 30px rgba(59, 130, 246, 0.2),
+                 2px 2px 3px rgba(59, 130, 246, 0.3);
   }
-  to {
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.6),
-                 0 0 20px rgba(59, 130, 246, 0.4),
-                 0 0 30px rgba(59, 130, 246, 0.2);
+  100% {
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.9),
+                 0 0 15px rgba(59, 130, 246, 0.7),
+                 0 0 25px rgba(59, 130, 246, 0.5),
+                 0 0 40px rgba(59, 130, 246, 0.3),
+                 2px 2px 3px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* Scanline Effect */
+@keyframes crt-scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Flicker Effect */
+@keyframes crt-flicker {
+  0% {
+    opacity: 0.97;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.98;
   }
 }
 
@@ -102,6 +172,8 @@
   font-family: 'Press Start 2P', cursive;
   letter-spacing: 0.05em;
   color: var(--accent-color); /* Blue */
+  position: relative;
+  z-index: 2;
 }
 
 .role-dot,
@@ -111,6 +183,8 @@
   font-family: 'Press Start 2P', cursive;
   letter-spacing: 0.05em;
   color: var(--accent-color); /* Blue */
+  position: relative;
+  z-index: 2;
 }
 
 .cursor {
@@ -118,6 +192,8 @@
   animation: blink 1s infinite;
   font-family: 'Press Start 2P', cursive;
   color: var(--accent-color); /* Blue */
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes blink {
