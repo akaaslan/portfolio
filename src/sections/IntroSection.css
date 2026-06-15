@@ -1,0 +1,76 @@
+/* ============ INTRO / BOOT — BRUTALIST ============ */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 4vw, 4rem) var(--gutter);
+}
+
+.intro-top {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+}
+
+.intro-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.intro-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 13vw, 12rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--paper);
+}
+.intro-logo em { font-style: normal; color: transparent; -webkit-text-stroke: 1.5px var(--paper); }
+
+.intro-terminal {
+  font-family: var(--font-mono);
+  font-size: clamp(0.62rem, 1.4vw, 0.78rem);
+  letter-spacing: 0.04em;
+  line-height: 2;
+  color: var(--paper-dim);
+  max-width: 520px;
+}
+.intro-line { display: block; }
+.intro-line--ready { color: var(--accent); font-weight: 600; }
+.intro-cursor { display: inline-block; color: var(--accent); animation: blink 0.9s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* progress bar */
+.intro-bar {
+  height: 2px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.intro-bar span {
+  position: absolute;
+  inset: 0 100% 0 0;
+  background: var(--accent);
+  transition: right 0.3s var(--ease-out);
+}
+
+.intro-foot {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+}

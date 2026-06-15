@@ -13,6 +13,7 @@ interface ImageCarouselProps {
 
 const ImageCarousel = ({ images, alt }: ImageCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const imageArray = [images.photo1, images.photo2, images.photo3, images.photo4];
 
   const goToPrevious = () => {
@@ -51,10 +52,14 @@ const ImageCarousel = ({ images, alt }: ImageCarouselProps) => {
           >
             {imageArray.map((image, index) => (
               <div key={index} className="carousel-slide">
-                <img 
-                  src={image} 
+                <div className={`carousel-skeleton ${loaded[index] ? 'is-loaded' : ''}`} />
+                <img
+                  src={image}
                   alt={`${alt} - Image ${index + 1}`}
-                  className="carousel-image"
+                  className={`carousel-image ${loaded[index] ? 'is-loaded' : ''}`}
+                  loading="lazy"
+                  decoding="async"
+                  onLoad={() => setLoaded(p => ({ ...p, [index]: true }))}
                 />
               </div>
             ))}

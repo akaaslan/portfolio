@@ -1,0 +1,89 @@
+/* ============ SKILLS — BRUTALIST EDITORIAL ============ */
+
+.skills__rows {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.skills__row {
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.skills__row-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.skills__row-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  text-transform: lowercase;
+}
+
+/* Pills inside marquee */
+.skills__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-right: 0.6rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--paper-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.skills__pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.skills__pill-ic { width: 15px; height: 15px; object-fit: contain; opacity: 0.7; }
+
+/* Modal */
+.skills__modal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(8, 9, 11, 0.8);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.skills__modal {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  padding: 2.2rem;
+  background: var(--ink-2);
+}
+.skills__modal-x {
+  position: absolute;
+  top: 1.2rem; right: 1.4rem;
+  color: var(--paper-mute);
+  transition: color 0.3s;
+}
+.skills__modal-x:hover { color: var(--accent); }
+.skills__modal-name {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin: 0.4rem 0 1rem;
+}
+
+@media (pointer: coarse) {
+  .skills__pill, .skills__modal-x { cursor: pointer; }
+}

@@ -1,0 +1,42 @@
+/* ============ NOW — compact status band ============ */
+.now { padding-top: clamp(2rem, 5vh, 3rem); padding-bottom: clamp(2rem, 5vh, 3rem); }
+
+.now__band {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(1.2rem, 3vw, 2rem) clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+}
+
+.now__label { margin: 0; color: var(--accent); }
+
+.now__rows {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2.5rem;
+}
+.now__row { display: flex; align-items: baseline; gap: 0.7rem; }
+.now__k { color: var(--paper-mute); }
+.now__v { font-size: 0.95rem; color: var(--paper); }
+a.now__v { color: var(--paper); }
+
+.now__pulse { display: inline-flex; }
+.now__pulse span {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: now-pulse 1.8s ease-in-out infinite;
+}
+@keyframes now-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+
+@media (max-width: 760px) {
+  .now__band { grid-template-columns: 1fr; gap: 1rem; }
+  .now__pulse { display: none; }
+}

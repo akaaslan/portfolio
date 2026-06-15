@@ -1,0 +1,74 @@
+/* ============ EXPERIENCE — EDITORIAL TIMELINE ============ */
+
+.exp__item {
+  display: grid;
+  grid-template-columns: clamp(4rem, 10vw, 8rem) 1fr auto;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+  padding: clamp(1.6rem, 3.5vw, 2.6rem) 0;
+  position: relative;
+  transition: padding-left 0.5s var(--ease-expo), background 0.5s var(--ease-expo);
+}
+.exp__item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-dim), transparent 70%);
+  transition: width 0.6s var(--ease-expo);
+  pointer-events: none;
+}
+.exp__item::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  width: 3px; height: 0;
+  background: var(--accent);
+  transform: translateY(-50%);
+  transition: height 0.5s var(--ease-expo);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.exp__item:hover { padding-left: clamp(1rem, 2.5vw, 2rem); }
+.exp__item:hover::before { width: 100%; }
+.exp__item:hover::after { height: 100%; }
+
+.exp__year {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  transition: -webkit-text-stroke 0.4s, color 0.4s, transform 0.5s var(--ease-expo);
+}
+.exp__item:hover .exp__year {
+  color: var(--accent);
+  -webkit-text-stroke: 1px var(--accent);
+  transform: translateX(4px);
+}
+
+.exp__body { max-width: 60ch; }
+.exp__place {
+  display: block;
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  margin-bottom: 0.5rem;
+}
+.exp__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin-bottom: 0.7rem;
+  transition: color 0.35s, transform 0.5s var(--ease-expo);
+}
+.exp__item:hover .exp__title { color: var(--accent); transform: translateX(6px); }
+.exp__desc { color: var(--paper-dim); }
+.exp__idx { color: var(--paper-faint); padding-top: 6px; transition: color 0.4s; }
+.exp__item:hover .exp__idx { color: var(--paper-dim); }
+
+@media (max-width: 760px) {
+  .exp__item { grid-template-columns: 1fr; gap: 0.7rem; }
+  .exp__idx { display: none; }
+}

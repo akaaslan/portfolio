@@ -1,0 +1,42 @@
+/* Top progress line */
+.scrollbar-top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 250;
+  pointer-events: none;
+  background: transparent;
+}
+.scrollbar-top span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Bottom-right section index */
+.scroll-index {
+  position: fixed;
+  bottom: 1.4rem;
+  right: var(--gutter);
+  z-index: 180;
+  pointer-events: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+  mix-blend-mode: difference;
+}
+.scroll-index__num { color: var(--accent); font-size: 0.8rem; }
+.scroll-index__label { color: var(--paper-dim); }
+
+@media (max-width: 640px) {
+  .scroll-index__label { display: none; }
+}

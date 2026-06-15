@@ -1,150 +1,187 @@
 import { useState } from 'react';
+import { EASE_OUT } from '../motion/easing';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
-import '../styles/HeaderMinimal.css';
-import '../styles/Header.css';
+import { SoundToggle } from '../ui/SoundToggle';
+import { sfxHover, sfxClick, sfxWhoosh } from '../audio/sfx';
+import '../styles/Header.css'; // BB-8 styles
+import './Header.new.css';
 
-interface HeaderProps {
+const NAV_ITEMS = [
+  { id: 'hero',       en: 'home',       tr: 'ana sayfa' },
+  { id: 'about',      en: 'about',      tr: 'hakkımda'  },
+  { id: 'skills',     en: 'skills',     tr: 'yetenekler'},
+  { id: 'projects',   en: 'work',       tr: 'projeler'  },
+  { id: 'experience', en: 'experience', tr: 'deneyim'   },
+  { id: 'lab',        en: 'lab',        tr: 'lab'       },
+  { id: 'contact',    en: 'contact',    tr: 'iletişim'  },
+];
+
+// Compact desktop nav (subset)
+const DESK_NAV = ['about', 'projects', 'lab', 'contact'];
+
+interface Props {
   activeSection: string;
 }
 
-const Header = ({ activeSection }: HeaderProps) => {
+export default function Header({ activeSection }: Props) {
   const { language, setLanguage } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const { theme, toggleTheme }    = useTheme();
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const [langAnim, setLangAnim]   = useState(false);
 
-  const handleLanguageChange = () => {
-    setIsAnimating(true);
+  const toggleLang = () => {
+    setLangAnim(true);
+    sfxClick();
     setTimeout(() => {
       setLanguage(language === 'tr' ? 'en' : 'tr');
-      setTimeout(() => setIsAnimating(false), 300);
+      setTimeout(() => setLangAnim(false), 300);
     }, 300);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const closeMenu = () => { sfxWhoosh(); setMenuOpen(false); };
 
   return (
-    <header className="header minimal" role="banner">
-      <div className="header-container">
-        {/* Logo */}
-        <div className="header-logo">
-          <h1>kaan</h1>
+    <>
+      <header className="hd">
+        {/* Wordmark */}
+        <a href="#hero" className="hd__brand" onMouseEnter={() => sfxHover()}>
+          <span className="hd__brand-mark">KAAN ASLAN</span>
+          <span className="hd__brand-reg">©</span>
+        </a>
+
+        {/* Availability status */}
+        <div className="hd__status">
+          <span className="hd__status-dot" />
+          {language === 'tr' ? 'çalışmaya açık' : 'available for work'}
         </div>
 
-        {/* BB-8 Toggle & Language Switch */}
-        <div className="header-right">
-          {/* Hamburger Menu - Mobile Only */}
-          <button 
-            className="hamburger-btn"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
+        {/* Desktop nav */}
+        <nav className="hd__nav">
+          {DESK_NAV.map(id => {
+            const item = NAV_ITEMS.find(n => n.id === id)!;
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`hd__nav-link ${activeSection === id ? 'is-active' : ''}`}
+                onMouseEnter={() => sfxHover()}
+              >
+                {language === 'tr' ? item.tr : item.en}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Controls */}
+        <div className="hd__controls">
+          <button
+            type="button"
+            className="hd__lang"
+            onClick={toggleLang}
+            onMouseEnter={() => sfxHover()}
+            aria-label="Toggle language"
           >
-            <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-            <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-            <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
+            <span className={langAnim ? 'lang-exit' : 'lang-enter'}>
+              {language === 'tr' ? 'EN' : 'TR'}
+            </span>
           </button>
 
-          {/* Desktop Navigation */}
-          <div className="desktop-nav">
-            {/* BB-8 Dark Mode Toggle */}
-            <label className="bb8-toggle">
-              <input 
-                className="bb8-toggle__checkbox" 
-                type="checkbox"
-                checked={theme === 'dark'}
-                onChange={toggleTheme}
-                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              />
-              <div className="bb8-toggle__container">
-                <div className="bb8-toggle__scenery">
-                  <div className="bb8-toggle__star"></div>
-                  <div className="bb8-toggle__star"></div>
-                  <div className="bb8-toggle__star"></div>
-                  <div className="bb8-toggle__star"></div>
-                  <div className="bb8-toggle__star"></div>
-                  <div className="bb8-toggle__star"></div>
-                  <div className="bb8-toggle__star"></div>
-                  <div className="tatto-1"></div>
-                  <div className="tatto-2"></div>
-                  <div className="gomrassen"></div>
-                  <div className="hermes"></div>
-                  <div className="chenini"></div>
-                  <div className="bb8-toggle__cloud"></div>
-                  <div className="bb8-toggle__cloud"></div>
-                  <div className="bb8-toggle__cloud"></div>
-                </div>
-                <div className="bb8">
-                  <div className="bb8__head-container">
-                    <div className="bb8__antenna"></div>
-                    <div className="bb8__antenna"></div>
-                    <div className="bb8__head"></div>
-                  </div>
-                  <div className="bb8__body"></div>
-                </div>
-                <div className="artificial__hidden">
-                  <div className="bb8__shadow"></div>
-                </div>
+          <SoundToggle />
+
+          {/* BB-8 toggle — switches the page to a night purple-blue palette */}
+          <label className="bb8-toggle" aria-label="Toggle night palette">
+            <input
+              className="bb8-toggle__checkbox"
+              type="checkbox"
+              checked={theme === 'dark'}
+              onChange={toggleTheme}
+            />
+            <div className="bb8-toggle__container">
+              <div className="bb8-toggle__scenery">
+                {Array.from({ length: 7 }).map((_, i) => (
+                  <div key={i} className="bb8-toggle__star" />
+                ))}
+                <div className="tatto-1" />
+                <div className="tatto-2" />
+                <div className="gomrassen" />
+                <div className="hermes" />
+                <div className="chenini" />
+                <div className="bb8-toggle__cloud" />
+                <div className="bb8-toggle__cloud" />
+                <div className="bb8-toggle__cloud" />
               </div>
-            </label>
+              <div className="bb8">
+                <div className="bb8__head-container">
+                  <div className="bb8__antenna" />
+                  <div className="bb8__antenna" />
+                  <div className="bb8__head" />
+                </div>
+                <div className="bb8__body" />
+              </div>
+              <div className="artificial__hidden">
+                <div className="bb8__shadow" />
+              </div>
+            </div>
+          </label>
 
-            <button
-              className="self-service-btn"
-              onClick={handleLanguageChange}
-              aria-label={language === 'tr' ? 'Switch to English' : 'Switch to Turkish'}
-            >
-              <span className={`service-lang ${isAnimating ? 'lang-exit' : 'lang-enter'}`}>
-                {language === 'tr' ? 'TÜRKÇE' : 'ENG'}
-              </span>
-            </button>
-          </div>
+          {/* Hamburger (mobile) */}
+          <button
+            type="button"
+            className="hd__burger"
+            onClick={() => { setMenuOpen(true); sfxWhoosh(); }}
+            aria-label="Open menu"
+          >
+            <span /><span />
+          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-        <nav className="mobile-nav">
-          <a 
-            href="#hero" 
-            className={`mobile-nav-link ${activeSection === 'hero' ? 'active' : ''}`}
-            onClick={toggleMenu}
+      {/* Mobile full-screen menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="hd-overlay"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.6, ease: EASE_OUT }}
           >
-            hero
-          </a>
-          <a 
-            href="#about" 
-            className={`mobile-nav-link ${activeSection === 'about' ? 'active' : ''}`}
-            onClick={toggleMenu}
-          >
-            about me
-          </a>
-          <a 
-            href="#skills" 
-            className={`mobile-nav-link ${activeSection === 'skills' ? 'active' : ''}`}
-            onClick={toggleMenu}
-          >
-            skills
-          </a>
-          <a 
-            href="#projects" 
-            className={`mobile-nav-link ${activeSection === 'projects' ? 'active' : ''}`}
-            onClick={toggleMenu}
-          >
-            projects
-          </a>
-          <a 
-            href="#contact" 
-            className={`mobile-nav-link ${activeSection === 'contact' ? 'active' : ''}`}
-            onClick={toggleMenu}
-          >
-            contact
-          </a>
-        </nav>
-      </div>
-    </header>
+            <button
+              type="button"
+              className="hd-overlay__close"
+              onClick={closeMenu}
+              aria-label="Close menu"
+            >
+              {language === 'tr' ? 'kapat' : 'close'} ×
+            </button>
+
+            <nav className="hd-overlay__nav">
+              {NAV_ITEMS.map((item, i) => (
+                <motion.a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={`hd-overlay__link ${activeSection === item.id ? 'is-active' : ''}`}
+                  onClick={closeMenu}
+                  onMouseEnter={() => sfxHover()}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 + 0.2, duration: 0.5, ease: EASE_OUT }}
+                >
+                  <span className="hd-overlay__num">0{i + 1}</span>
+                  {language === 'tr' ? item.tr : item.en}
+                </motion.a>
+              ))}
+            </nav>
+
+            <div className="hd-overlay__foot">
+              <span>kaanaslan839@gmail.com</span>
+              <span>İSTANBUL — {new Date().getFullYear()}</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
-};
-
-export default Header;
+}

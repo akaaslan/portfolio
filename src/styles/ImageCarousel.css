@@ -36,6 +36,30 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(1.04);
+  transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+}
+.carousel-image.is-loaded {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Shimmer skeleton while the image loads */
+.carousel-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, var(--ink-2) 30%, var(--ink-3) 50%, var(--ink-2) 70%);
+  background-size: 200% 100%;
+  animation: carousel-shimmer 1.3s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+}
+.carousel-skeleton.is-loaded { opacity: 0; }
+@keyframes carousel-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .carousel-button {

@@ -1,6 +1,6 @@
 // Import assets
-import guideappImage from '../assets/guideapp.png';
-import ecommerceImage from '../assets/ecommerce.png';
+import guideappImage from '../assets/guideapp.webp';
+import ecommerceImage from '../assets/ecommerce.webp';
 
 export const portfolioData = {
   tr: {
