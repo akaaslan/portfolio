@@ -1,6 +1,7 @@
 // Import assets
 import guideappImage from '../assets/guideapp.webp';
 import ecommerceImage from '../assets/ecommerce.webp';
+import edirnekirmiziImage from '../assets/edirnekirmizi.png';
 
 export const portfolioData = {
   tr: {
@@ -69,12 +70,12 @@ export const portfolioData = {
         viewSiteLink: "https://ecommerce.vercel.app/"
       },
       {
-        title: "Portfolio Website",
-        description: "Kişisel portfolio websitem. Modern tasarım ve animasyonlar içeriyor.",
-        image: "/api/placeholder/400/300",
+        title: "Edirne Kırmızısı",
+        description: "Edirne Kırmızısı'nın tarihine ve kültürüne adanmış bir site. Site, modern tasarımı ve ziyaretçileri etkilemek için interaktif öğeleri içeriyor.",
+        image: edirnekirmiziImage,
         techStack: ["React", "TypeScript", "Vite"],
-        githubLink: "https://github.com/akaaslan/portfolio2",
-        viewSiteLink: "#"
+        githubLink: "https://github.com/akaaslan/edirne-kirmizi",
+        viewSiteLink: "https://edirnekirmizi.com"
       }
     ],
     footer: {
@@ -153,12 +154,12 @@ export const portfolioData = {
         viewSiteLink: "https://adrianred.vercel.app/"
       },
       {
-        title: "Portfolio Website",
-        description: "My personal portfolio website featuring modern design and smooth animations.",
-        image: "/api/placeholder/400/300",
+        title: "Edirne Kırmızısı",
+        description: "A site dedicated to the history and culture of Edirne Kırmızısı, a traditional Turkish textile art. The site features a modern design and interactive elements to engage visitors.",
+        image: edirnekirmiziImage,
         techStack: ["React", "TypeScript", "Vite"],
-        githubLink: "https://github.com/akaaslan/portfolio2",
-        viewSiteLink: "#"
+        githubLink: "https://github.com/akaaslan/edirne-kirmizi",
+        viewSiteLink: "https://edirnekirmizi.com"
       }
     ],
     footer: {
