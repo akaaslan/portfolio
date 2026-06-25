@@ -24,6 +24,57 @@
 .now__v { font-size: 0.95rem; color: var(--paper); }
 a.now__v { color: var(--paper); }
 
+/* Live track row */
+.now__row--track { align-items: center; }
+.now__fallback { display: inline-flex; align-items: baseline; gap: 0.7rem; }
+
+.now__track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  transition: opacity 0.3s;
+}
+.now__track:hover { opacity: 0.85; }
+.now__track:hover .now__arrow { transform: translate(3px, -3px); }
+
+.now__cover {
+  width: 44px; height: 44px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.now__track-meta { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.now__state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--paper-mute);
+  letter-spacing: 0.16em;
+}
+.now__state.is-live { color: var(--accent); }
+.now__song {
+  font-size: 0.95rem;
+  color: var(--paper);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 46ch;
+}
+.now__artist { color: var(--paper-dim); }
+.now__arrow { color: var(--paper-mute); transition: transform 0.4s var(--ease-expo); }
+
+/* Equalizer bars (only when playing) */
+.now__eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 10px; }
+.now__eq i {
+  width: 2px;
+  background: var(--accent);
+  animation: now-eq 0.9s ease-in-out infinite;
+}
+.now__eq i:nth-child(1) { height: 40%; animation-delay: 0s; }
+.now__eq i:nth-child(2) { height: 100%; animation-delay: 0.25s; }
+.now__eq i:nth-child(3) { height: 65%; animation-delay: 0.5s; }
+@keyframes now-eq { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+
 .now__pulse { display: inline-flex; }
 .now__pulse span {
   width: 9px; height: 9px; border-radius: 50%;

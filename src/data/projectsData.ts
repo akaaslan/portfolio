@@ -1,221 +1,223 @@
+import ecommerceImage from '../assets/ecommerce.webp';
+import edirnekirmiziImage from '../assets/edirnekirmizi.webp';
+import potaImage from '../assets/ph-pota.svg';
+import ayasofyaImage from '../assets/ph-ayasofya.svg';
+import ramisaImage from '../assets/ph-ramisa.svg';
+
 export interface ProjectDetail {
   id: string;
   title: string;
   shortDescription: string;
   detailedDescription: string;
   techStack: string[];
-  images: {
-    photo1: string;
-    photo2: string;
-    photo3: string;
-    photo4: string;
-  };
-  githubLink: string;
-  viewSiteLink: string;
+  image: string;        // primary image (list + cursor preview)
+  images: string[];     // gallery shown in the modal
+  githubLink: string;   // '#' when there is no public repo
+  viewSiteLink: string; // '#' when there is no live link
   features: string[];
 }
 
-type ProjectsData = {
-  [key: string]: ProjectDetail;
-};
+type ProjectsData = Record<string, ProjectDetail>;
 
 export const projectsDetailData: { tr: ProjectsData; en: ProjectsData } = {
   tr: {
-    sanalturrehberi: {
-      id: 'sanalturrehberi',
-      title: 'Sanal Tur Rehberi',
-      shortDescription: 'Bitirme tezi projem olarak geliştirdiğim sanal tur rehberi uygulaması.',
-      detailedDescription: `Sanal Tur Rehberi, kullanıcılara turistik mekanları sanal ortamda keşfetme imkanı sunan bir mobil uygulamadır.
-      
-      React Native kullanılarak geliştirilmiş olan bu proje, gerçek zamanlı konum takibi, harita entegrasyonu ve detaylı mekan bilgileri sunmaktadır.
-      
-      Bitirme tezi projesi olarak geliştirilen uygulama, modern mobil uygulama geliştirme tekniklerini kullanmaktadır.`,
-      techStack: ['JavaScript', 'React Native', 'Google Maps API', 'Geolocation'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
-      githubLink: 'https://github.com/akaaslan/guideapp3',
-      viewSiteLink: '#',
-      features: [
-        'React Native - Cross-platform mobil uygulama',
-        'Gerçek zamanlı konum takibi',
-        'Google Maps harita entegrasyonu',
-        'Detaylı mekan bilgileri ve fotoğraflar'
-      ]
-    },
-    'e-ticaretsitesi': {
-      id: 'e-ticaretsitesi',
-      title: 'E-Ticaret Sitesi',
-      shortDescription: 'Modern ve kullanıcı dostu bir e-ticaret platformu.',
-      detailedDescription: `Modern ve kullanıcı dostu bir e-ticaret platformu. TypeScript ve React kullanılarak geliştirilmiş, Redux ile state yönetimi sağlanmıştır.
-      
-      Ürün listeleme, detaylı ürün sayfaları, sepet yönetimi ve kullanıcı oturumu gibi temel e-ticaret özellikleri içermektedir.
-      
-      Responsive tasarımı ile tüm cihazlarda sorunsuz çalışmaktadır.`,
-      techStack: ['TypeScript', 'React', 'Redux', 'CSS3', 'REST API'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
+    adrianred: {
+      id: 'adrianred',
+      title: 'Adrian Red — E-Ticaret',
+      shortDescription: 'Ürün kataloğu, sepet ve ödeme akışlarına sahip, React ve Redux ile geliştirilmiş bir e-ticaret deneyimi.',
+      detailedDescription:
+        'Adrian Red, modern bir e-ticaret arayüzüdür. Ürün listeleme, filtreleme, sepet yönetimi ve ödeme akışlarını içerir. ' +
+        'React ve Redux ile uçtan uca durum yönetimi yapılmış, responsive ve performanslı bir kullanıcı deneyimi hedeflenmiştir.',
+      techStack: ['React', 'TypeScript', 'Redux', 'Vite'],
+      image: ecommerceImage,
+      images: [ecommerceImage],
       githubLink: 'https://github.com/akaaslan/adrianred',
       viewSiteLink: 'https://adrianred.vercel.app/',
       features: [
-        'TypeScript - Tip güvenli kod yapısı',
-        'Redux State Management - Merkezi veri yönetimi',
-        'Responsive Design - Her cihazda uyumlu',
-        'Ürün kataloğu ve sepet sistemi'
-      ]
+        'Ürün kataloğu, arama ve filtreleme',
+        'Redux ile sepet yönetimi',
+        'Ödeme / checkout akışı',
+        'Tamamen responsive tasarım',
+      ],
     },
-    'birseylerahahaguncellerizburayı.': {
-      id: 'birseylerahahaguncellerizburayı.',
-      title: 'Bir şeyler aha ha güncelleriz burayı.',
-      shortDescription: 'Yakında yeni projelerle güncellenecek.',
-      detailedDescription: `Bu alan yakında yeni projelerle güncellenecektir.
-      
-      Üzerinde çalışılan yeni projeler burada yer alacaktır.`,
-      techStack: ['Yakında', 'Güncellenecek'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
+    pota: {
+      id: 'pota',
+      title: 'POTA — Basketbol',
+      shortDescription: 'Sokak basketbolunu sosyalleştiren mobil uygulama: saha bul, maç kur, oyuncularla buluş.',
+      detailedDescription:
+        'POTA, basketbol tutkunlarını bir araya getiren bir mobil uygulamadır. React Native (Expo) ile geliştirildi, ' +
+        'Supabase ile gerçek zamanlı veri ve kimlik doğrulama kullanır. Yakındaki sahaları keşfet, maç oluştur ve diğer oyuncularla buluş.',
+      techStack: ['React Native', 'Expo', 'TypeScript', 'Supabase'],
+      image: potaImage,
+      images: [potaImage],
+      githubLink: 'https://github.com/akaaslan/POTA',
+      viewSiteLink: '#',
+      features: [
+        'Supabase ile kimlik doğrulama',
+        'Gerçek zamanlı maç ve oyuncu verisi',
+        'Yakındaki sahaları keşfetme',
+        'Maç oluşturma ve katılma',
+      ],
+    },
+    ayasofya: {
+      id: 'ayasofya',
+      title: 'Ayasofya — Ezan Vakti',
+      shortDescription: 'Namaz vakitleri, kıble, Kuran ve zikir — tam çevrimdışı destekli kapsamlı bir ibadet uygulaması.',
+      detailedDescription:
+        'Ayasofya; namaz vakitleri, gerçek zamanlı vakit sayacı, kıble pusulası, Kuran okuyucu, esmaül hüsna ve zikir sayacı ' +
+        'sunan kapsamlı bir İslami uygulamadır. React Native ile geliştirildi; tam çevrimdışı çalışır, çok dilli ve çoklu tema desteği vardır.',
+      techStack: ['React Native', 'Expo', 'JavaScript'],
+      image: ayasofyaImage,
+      images: [ayasofyaImage],
+      githubLink: 'https://github.com/akaaslan/Ayasofya',
+      viewSiteLink: '#',
+      features: [
+        '6 vakit için gerçek zamanlı geri sayım',
+        'Kıble pusulası (yön & mesafe)',
+        'Kuran okuyucu ve zikir sayacı',
+        'Ramazan modu, çevrimdışı & çok dilli',
+      ],
+    },
+    edirnekirmizi: {
+      id: 'edirnekirmizi',
+      title: 'Edirne Kırmızısı',
+      shortDescription: 'Edirne Kırmızısı’nın tarihine ve kültürüne adanmış, modern ve interaktif bir tanıtım sitesi.',
+      detailedDescription:
+        'Edirne Kırmızısı, geleneksel Türk tekstil sanatı Edirne Kırmızısı’nın tarihini ve kültürünü anlatan bir web sitesidir. ' +
+        'Modern tasarım, akıcı animasyonlar ve interaktif öğelerle ziyaretçiye zengin bir deneyim sunar.',
+      techStack: ['React', 'TypeScript', 'Vite'],
+      image: edirnekirmiziImage,
+      images: [edirnekirmiziImage],
+      githubLink: 'https://github.com/akaaslan/edirne-kirmizi',
+      viewSiteLink: 'https://edirnekirmizi.com',
+      features: [
+        'Anlatımsal, kaydırmaya dayalı tasarım',
+        'İnteraktif görsel öğeler ve animasyonlar',
+        'Performans odaklı Vite kurulumu',
+        'Tamamen responsive',
+      ],
+    },
+    ramisabarbers: {
+      id: 'ramisabarbers',
+      title: 'Ramisa Barbers',
+      shortDescription: 'Bir berber için modern tanıtım ve randevu sitesi. (Yakında yayında)',
+      detailedDescription:
+        'Ramisa Barbers, bir berber dükkânı için tasarladığım modern ve şık bir tanıtım sitesidir. ' +
+        'Hizmetler, galeri ve randevu akışını içerir. Henüz yayında değil — yakında.',
+      techStack: ['React', 'TypeScript', 'Vite'],
+      image: ramisaImage,
+      images: [ramisaImage],
       githubLink: '#',
       viewSiteLink: '#',
       features: [
-        'Yakında eklenecek özellikler',
-        'Yeni teknolojiler',
-        'Modern yaklaşımlar'
-      ]
+        'Modern tanıtım / landing sayfası',
+        'Hizmet ve galeri bölümleri',
+        'Randevu akışı',
+        'Tamamen responsive',
+      ],
     },
-    portfoliowebsite: {
-      id: 'portfoliowebsite',
-      title: 'Portfolio Website',
-      shortDescription: 'Modern tasarım ve animasyonlar içeren kişisel portfolio websitem.',
-      detailedDescription: `React, TypeScript ve Vite ile geliştirilmiş modern ve responsive bir portfolio websitesi.
-      
-      Bu proje, becerilerimi ve projelerimi temiz, minimalist bir tasarımla sergiliyor. Smooth animasyonlar, dark mode desteği ve interaktif proje modal sistemi gibi özellikler içeriyor.
-      
-      Modern web teknolojileri ve best practice'ler kullanılarak, performans ve kullanıcı deneyimine odaklanarak geliştirildi.`,
-      techStack: ['React', 'TypeScript', 'Vite', 'CSS3', 'Framer Motion'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
-      githubLink: 'https://github.com/akaaslan/portfolio2',
-      viewSiteLink: '#',
-      features: [
-        'TypeScript ile modern React',
-        'Tüm cihazlar için responsive tasarım',
-        'Akıcı animasyonlar ve geçişler',
-        'Modal sistemi ile interaktif proje vitrini'
-      ]
-    }
   },
   en: {
-    virtualtourguideapplication: {
-      id: 'virtualtourguideapplication',
-      title: 'Virtual Tour Guide Application',
-      shortDescription: 'A virtual tour guide mobile application developed as my graduation thesis.',
-      detailedDescription: `Virtual Tour Guide is a mobile application that allows users to explore tourist attractions in a virtual environment.
-      
-      Developed using React Native, this project offers real-time location tracking, map integration, and detailed location information.
-      
-      Created as a graduation thesis project, the application utilizes modern mobile app development techniques.`,
-      techStack: ['JavaScript', 'React Native', 'Google Maps API', 'Geolocation'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
-      githubLink: 'https://github.com/akaaslan/guideapp3',
-      viewSiteLink: '#',
-      features: [
-        'React Native - Cross-platform mobile app',
-        'Real-time location tracking',
-        'Map integration with Google Maps',
-        'Detailed location information and photos'
-      ]
-    },
-    'e-commercesite': {
-      id: 'e-commercesite',
-      title: 'E-Commerce Site',
-      shortDescription: 'A modern e-commerce platform.',
-      detailedDescription: `A modern and user-friendly e-commerce platform. Developed using TypeScript and React, with Redux for state management.
-      
-      Features include product listings, detailed product pages, shopping cart management, and user authentication.
-      
-      Responsive design ensures seamless functionality across all devices.`,
-      techStack: ['TypeScript', 'React', 'Redux', 'CSS3', 'REST API'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
+    adrianred: {
+      id: 'adrianred',
+      title: 'Adrian Red — E-Commerce',
+      shortDescription: 'A full e-commerce experience with catalog, cart and checkout flows, built with React and Redux.',
+      detailedDescription:
+        'Adrian Red is a modern e-commerce interface featuring product listing, filtering, cart management and checkout flows. ' +
+        'State is managed end-to-end with React and Redux, aiming for a responsive and performant user experience.',
+      techStack: ['React', 'TypeScript', 'Redux', 'Vite'],
+      image: ecommerceImage,
+      images: [ecommerceImage],
       githubLink: 'https://github.com/akaaslan/adrianred',
       viewSiteLink: 'https://adrianred.vercel.app/',
       features: [
-        'TypeScript - Type-safe code structure',
-        'Redux State Management - Centralized data management',
-        'Responsive Design - Compatible with all devices',
-        'Product catalog and cart system'
-      ]
+        'Product catalog, search and filtering',
+        'Cart management with Redux',
+        'Checkout flow',
+        'Fully responsive design',
+      ],
     },
-    gonnaupdatesoon: {
-      id: 'gonnaupdatesoon',
-      title: 'Gonna Update Soon',
-      shortDescription: 'Coming soon with new features.',
-      detailedDescription: `This section will be updated soon with new projects.
-      
-      New projects in development will be featured here.`,
-      techStack: ['Coming', 'Soon'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
+    pota: {
+      id: 'pota',
+      title: 'POTA — Basketball',
+      shortDescription: 'A mobile app that makes street basketball social: find courts, set up games, meet players.',
+      detailedDescription:
+        'POTA brings basketball lovers together. Built with React Native (Expo) and powered by Supabase for real-time data and auth, ' +
+        'it lets you discover nearby courts, create games and meet other players.',
+      techStack: ['React Native', 'Expo', 'TypeScript', 'Supabase'],
+      image: potaImage,
+      images: [potaImage],
+      githubLink: 'https://github.com/akaaslan/POTA',
+      viewSiteLink: '#',
+      features: [
+        'Authentication with Supabase',
+        'Real-time game & player data',
+        'Discover nearby courts',
+        'Create and join games',
+      ],
+    },
+    ayasofya: {
+      id: 'ayasofya',
+      title: 'Ayasofya — Prayer Times',
+      shortDescription: 'Prayer times, qibla, Quran and dhikr — a comprehensive worship app with full offline support.',
+      detailedDescription:
+        'Ayasofya is a comprehensive Islamic app offering prayer times, a real-time prayer countdown, a qibla compass, ' +
+        'a Quran reader, the 99 Names of Allah and a dhikr counter. Built with React Native; it works fully offline with multi-language and multi-theme support.',
+      techStack: ['React Native', 'Expo', 'JavaScript'],
+      image: ayasofyaImage,
+      images: [ayasofyaImage],
+      githubLink: 'https://github.com/akaaslan/Ayasofya',
+      viewSiteLink: '#',
+      features: [
+        'Real-time countdown for 6 daily prayers',
+        'Qibla compass (bearing & distance)',
+        'Quran reader and dhikr counter',
+        'Ramadan mode, offline & multi-language',
+      ],
+    },
+    edirnekirmizi: {
+      id: 'edirnekirmizi',
+      title: 'Edirne Kırmızısı',
+      shortDescription: 'A modern, interactive site dedicated to the history and culture of Edirne Kırmızısı.',
+      detailedDescription:
+        'Edirne Kırmızısı is a website dedicated to the history and culture of the traditional Turkish textile art "Edirne Kırmızısı". ' +
+        'It features a modern design, smooth animations and interactive elements to give visitors a rich experience.',
+      techStack: ['React', 'TypeScript', 'Vite'],
+      image: edirnekirmiziImage,
+      images: [edirnekirmiziImage],
+      githubLink: 'https://github.com/akaaslan/edirne-kirmizi',
+      viewSiteLink: 'https://edirnekirmizi.com',
+      features: [
+        'Narrative, scroll-driven design',
+        'Interactive visual elements and animations',
+        'Performance-focused Vite setup',
+        'Fully responsive',
+      ],
+    },
+    ramisabarbers: {
+      id: 'ramisabarbers',
+      title: 'Ramisa Barbers',
+      shortDescription: 'A modern landing & booking site for a barbershop. (Going live soon)',
+      detailedDescription:
+        'Ramisa Barbers is a modern, sleek landing site I designed for a barbershop, including services, a gallery and a booking flow. ' +
+        'Not deployed yet — coming soon.',
+      techStack: ['React', 'TypeScript', 'Vite'],
+      image: ramisaImage,
+      images: [ramisaImage],
       githubLink: '#',
       viewSiteLink: '#',
       features: [
-        'Features to be added soon',
-        'New technologies',
-        'Modern approaches'
-      ]
+        'Modern landing page',
+        'Services and gallery sections',
+        'Booking flow',
+        'Fully responsive',
+      ],
     },
-    portfoliowebsite: {
-      id: 'portfoliowebsite',
-      title: 'Portfolio Website',
-      shortDescription: 'My personal portfolio website featuring modern design and smooth animations.',
-      detailedDescription: `A modern and responsive portfolio website built with React, TypeScript, and Vite.
-      
-      This project showcases my skills and projects with a clean, minimalist design. Features include smooth animations, dark mode support, and an interactive project modal system.
-      
-      Built with modern web technologies and best practices, focusing on performance and user experience.`,
-      techStack: ['React', 'TypeScript', 'Vite', 'CSS3', 'Framer Motion'],
-      images: {
-        photo1: '/api/placeholder/800/600',
-        photo2: '/api/placeholder/800/600',
-        photo3: '/api/placeholder/800/600',
-        photo4: '/api/placeholder/800/600'
-      },
-      githubLink: 'https://github.com/akaaslan/portfolio2',
-      viewSiteLink: '#',
-      features: [
-        'Modern React with TypeScript',
-        'Responsive design for all devices',
-        'Smooth animations and transitions',
-        'Interactive project showcase with modals'
-      ]
-    }
-  }
+  },
+};
+
+// Ordered list per language (used by the Projects section)
+export const projectsList = {
+  tr: Object.values(projectsDetailData.tr),
+  en: Object.values(projectsDetailData.en),
 };

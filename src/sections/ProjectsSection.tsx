@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import { projectsDetailData } from '../data/projectsData';
+import { projectsDetailData, projectsList } from '../data/projectsData';
 import ProjectModal from '../components/ProjectModal';
 import { sfxHover, sfxClick } from '../audio/sfx';
 import './ProjectsSection.css';
 
 export function ProjectsSection() {
-  const { data, language } = useLanguage();
+  const { language } = useLanguage();
+  const projects = projectsList[language];
   const ref = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const [previewImg, setPreviewImg] = useState<string | null>(null);
@@ -41,11 +42,11 @@ export function ProjectsSection() {
       </div>
 
       <ul className="work__list">
-        {data.projects.map((project, i) => {
-          const id = project.title.toLowerCase().replace(/\s+/g, '');
+        {projects.map((project, i) => {
+          const id = project.id;
           return (
             <li
-              key={project.title}
+              key={id}
               className="work__item reveal"
               data-cursor={language === 'tr' ? 'aç' : 'open'}
               onClick={e => openModal(id, e)}

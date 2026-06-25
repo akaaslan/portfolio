@@ -1,7 +1,7 @@
 // Import assets
 import guideappImage from '../assets/guideapp.webp';
 import ecommerceImage from '../assets/ecommerce.webp';
-import edirnekirmiziImage from '../assets/edirnekirmizi.png';
+import edirnekirmiziImage from '../assets/edirnekirmizi.webp';
 
 export const portfolioData = {
   tr: {

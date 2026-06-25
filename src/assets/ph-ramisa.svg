@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#0E0F12"/>
+  <g stroke="#F4F4F2" stroke-opacity="0.05">
+    <line x1="320" y1="0" x2="320" y2="800"/>
+    <line x1="640" y1="0" x2="640" y2="800"/>
+    <line x1="960" y1="0" x2="960" y2="800"/>
+  </g>
+  <rect x="80" y="120" width="56" height="6" fill="#CCFF00"/>
+  <text x="78" y="450" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="112" letter-spacing="-5" fill="#F4F4F2">RAMISA</text>
+  <text x="78" y="560" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="112" letter-spacing="-5" fill="transparent" stroke="#F4F4F2" stroke-width="1.5">BARBERS</text>
+  <text x="84" y="620" font-family="monospace" font-size="22" letter-spacing="8" fill="#CCFF00">BARBERSHOP · PREVIEW SOON</text>
+</svg>
